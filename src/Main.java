@@ -13,7 +13,7 @@ public class Main {
 //        int personY = 1;
         Person person = new Person(sizeBoard);
 
-
+        byte percentOfSmallMonster = 70; // Вероятность появления маленького монстра
         int step = 0;
 
         String[][] board = new String[sizeBoard][sizeBoard];
@@ -32,7 +32,7 @@ public class Main {
         int count = 0;
         Monster test;
         while (count <= count_monster){
-            test = new Monster(sizeBoard);
+            test = new Monster(sizeBoard, r.nextInt(100) < percentOfSmallMonster ? "Small" : "Big");
             if (board[test.getY()][test.getX()].equals("  ")){
                 board[test.getY()][test.getX()] = test.getImage();
                 arrMonster[count] = test;
@@ -83,7 +83,7 @@ public class Main {
                         }else {
                             for (Monster monster : arrMonster) {
                                 if (monster.conflictPerson(x, y)) {
-                                    if (monster.taskMonster(difficultGame)) {
+                                    if (monster.taskMonster(difficultGame, monster.getMonsterSize())) {
                                         board[person.getY() - 1][person.getX() - 1] = "  ";
                                         person.move(x, y);
 
