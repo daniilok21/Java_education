@@ -40,9 +40,11 @@ public class Person {
         this.image = image;
     }
 
-    public boolean moveCorrect(int x, int y){
+    public boolean moveCorrect(int x, int y, int sizeBoard){
         if (this.x == x && Math.abs(this.y - y) == 1 || this.y == y && Math.abs(this.x - x) == 1){
-            return true;
+            if (x <= sizeBoard && y <= sizeBoard && x >= 1 && y >= 1) {
+                return true;
+            }
         }
         return false;
     }

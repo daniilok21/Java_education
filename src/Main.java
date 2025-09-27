@@ -59,6 +59,10 @@ public class Main {
             case "ДА" -> {
                 System.out.println("Выбери сложность игры(от 1 до 5):");
                 int difficultGame = sc.nextInt();
+                while (difficultGame < 1 || difficultGame > 5) {
+                    System.out.println("Некоректный ввод. Выбери сложность игры(от 1 до 5):");
+                    difficultGame = sc.nextInt();
+                }
                 System.out.println("Выбранная сложность:\t" + difficultGame);
                 while (person.getLive() > 0) {
                     board[person.getY() - 1][person.getX() - 1] = person.getImage();
@@ -69,7 +73,7 @@ public class Main {
                     int y = sc.nextInt();
 
                     // проверка
-                    if (person.moveCorrect(x, y)) {
+                    if (person.moveCorrect(x, y, sizeBoard)) {
                         String next = board[y - 1][x - 1];
                         if (next.equals("  ")) {
                             board[person.getY() - 1][person.getX() - 1] = "  ";
