@@ -13,7 +13,7 @@ public class Main {
 //        int personY = 1;
         Person person = new Person(sizeBoard);
 
-        byte percentOfSmallMonster = 70; // Вероятность появления маленького монстра
+        byte percentOfSmallMonster = 80; // Вероятность появления маленького монстра
         int step = 0;
 
         String[][] board = new String[sizeBoard][sizeBoard];
@@ -60,7 +60,7 @@ public class Main {
                 System.out.println("Выбери сложность игры(от 1 до 5):");
                 int difficultGame = sc.nextInt();
                 System.out.println("Выбранная сложность:\t" + difficultGame);
-                while (true) {
+                while (person.getLive() > 0) {
                     board[person.getY() - 1][person.getX() - 1] = person.getImage();
                     outputBoard(board, person.getLive());
                     System.out.println("Введите куда будет ходить персонаж(ход возможен только по вертикали и горизонтали на одну клетку;" +
@@ -97,6 +97,9 @@ public class Main {
                     } else {
                         System.out.println("Неккоректный ход");
                     }
+                }
+                if (person.getLive() == 0) {
+                    System.out.println("Вы проиграли!");
                 }
             }
             case "НЕТ" -> System.out.println("Жаль, приходи еще!");

@@ -67,6 +67,23 @@ public class Monster {
     public boolean nimTaskMonster(int difficultGame) {
         // Ним - игра для большого монстра.
         // оставляем игроку число кратное 4
+        byte percentOfMistake;
+        switch (difficultGame) {
+            case (1):
+                percentOfMistake = 50;
+                break;
+            case (2):
+                percentOfMistake = 40;
+                break;
+            case (3):
+                percentOfMistake = 25;
+                break;
+            case (4):
+                percentOfMistake = 15;
+                break;
+            default:
+                percentOfMistake = 0;
+        }
         Scanner sc = new Scanner(System.in);
         printRulesOfNim();
         int stones = r.nextInt(15, 21);
@@ -77,7 +94,7 @@ public class Monster {
         while (stones > 0) {
             if (!turnOfPerson) {
                 // логика бота
-                if (stones % 4 != 0) {
+                if (stones % 4 != 0 && r.nextInt(100) >= percentOfMistake) {
                     countOfTurn = stones % 4;
                 } else {
                     countOfTurn = r.nextInt(1, 4);
