@@ -1,7 +1,7 @@
 import java.util.Random;
 
 public class Person {
-    protected int x, y;
+    private int x, y;
     private String image = "\uD83E\uDDD9\u200D";
     private int live = 3;
     Random r = new Random();
@@ -40,8 +40,13 @@ public class Person {
         this.image = image;
     }
 
-    public boolean moveCorrect(int x, int y){
-        return this.x == x && Math.abs(this.y - y) == 1 || this.y == y && Math.abs(this.x - x) == 1;
+    public boolean moveCorrect(int x, int y, int sizeBoard){
+        if (this.x == x && Math.abs(this.y - y) == 1 || this.y == y && Math.abs(this.x - x) == 1){
+            if (x <= sizeBoard && y <= sizeBoard && x >= 1 && y >= 1) {
+                return true;
+            }
+        }
+        return false;
     }
 
     void move(int x, int y){

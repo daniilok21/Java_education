@@ -28,11 +28,18 @@ public class Main {
         int count = 0;
         Monster test;
         while (count <= countMonster){
-            if (r.nextBoolean()) {
-                test = new Monster(sizeBoard);
-            }else {
-                test = new BigMonster(sizeBoard);
+            int temp = r.nextInt(3);
+            switch (temp) {
+                case (0):
+                    test = new Monster(sizeBoard);
+                    break;
+                case (1):
+                    test = new BigMonster(sizeBoard);
+                    break;
+                default:
+                    test = new SmallMonster(sizeBoard);
             }
+
             if (board[test.getY()][test.getX()].equals("  ")){
                 board[test.getY()][test.getX()] = test.getImage();
                 arrMonster[count] = test;
@@ -60,6 +67,10 @@ public class Main {
             case "ДА" -> {
                 System.out.println("Выбери сложность игры(от 1 до 5):");
                 int difficultGame = sc.nextInt();
+                while (difficultGame < 0 || difficultGame > 5) {
+                    difficultGame = sc.nextInt();
+                    System.out.println("Данные введены неккоректно");
+                }
                 System.out.println("Выбранная сложность:\t" + difficultGame);
                 while (true) {
                     board[person.getY() - 1][person.getX() - 1] = person.getImage();
@@ -70,7 +81,7 @@ public class Main {
                     int y = sc.nextInt();
 
                     // проверка
-                    if (person.moveCorrect(x, y)) {
+                    if (person.moveCorrect(x, y, sizeBoard)) {
                         String next = board[y - 1][x - 1];
                         if (next.equals("  ")) {
                             board[person.getY() - 1][person.getX() - 1] = "  ";
